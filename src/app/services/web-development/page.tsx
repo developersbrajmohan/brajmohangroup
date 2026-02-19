@@ -11,7 +11,7 @@ export const metadata = {
 
 export default function WebDevelopmentPage() {
     return (
-        <main className="bg-bmd-navy min-h-screen">
+        <main className="bg-white min-h-screen">
             <WebDevHero />
             <WebDevServices />
             <WebDevWhyChooseUs />

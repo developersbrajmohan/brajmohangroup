@@ -17,36 +17,36 @@ const customers = [
 
 export default function HappyCustomers() {
     return (
-        <SectionWrapper className="bg-bmd-navy relative py-20 overflow-hidden">
+        <SectionWrapper className="bg-[#F9F5F0] relative py-20 overflow-hidden">
             <div className="container mx-auto px-6 mb-12 text-center">
-                <h2 className="text-4xl md:text-6xl font-dancing text-bmd-gold mb-4">
+                <h2 className="text-4xl md:text-6xl font-dancing text-bmd-gold mb-4 drop-shadow-sm">
                     Happy Customers
                 </h2>
-                <p className="text-gray-400 font-light tracking-wide">
+                <p className="text-gray-600 font-light tracking-wide uppercase text-sm">
                     Building Trust, Deliver Satisfaction
                 </p>
             </div>
 
             {/* Marquee Container */}
             <div className="relative w-full overflow-hidden">
-                {/* Gradient Masks */}
-                <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 z-10 bg-gradient-to-r from-bmd-navy to-transparent pointer-events-none" />
-                <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 z-10 bg-gradient-to-l from-bmd-navy to-transparent pointer-events-none" />
+                {/* Gradient Masks - Updated to match vintage bg */}
+                <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 z-10 bg-gradient-to-r from-[#F9F5F0] to-transparent pointer-events-none" />
+                <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 z-10 bg-gradient-to-l from-[#F9F5F0] to-transparent pointer-events-none" />
 
                 <div className="flex gap-6 w-max animate-marquee hover:[animation-play-state:paused]">
                     {/* Double the list for seamless loop */}
                     {[...customers, ...customers].map((src, index) => (
                         <div
                             key={index}
-                            className="relative w-64 h-80 md:w-80 md:h-96 rounded-xl overflow-hidden border border-white/10 shrink-0 group hover:border-bmd-gold transition-colors duration-300"
+                            className="relative w-64 h-80 md:w-80 md:h-96 rounded-xl overflow-hidden border border-bmd-gold/30 shrink-0 group hover:border-bmd-gold transition-colors duration-300 shadow-sm"
                         >
                             <Image
                                 src={src}
                                 alt={`Happy Customer ${index + 1}`}
                                 fill
-                                className="object-cover group-hover:scale-110 transition-transform duration-700"
+                                className="object-cover group-hover:scale-105 transition-transform duration-700"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-bmd-navy/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-bmd-navy/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
                     ))}
                 </div>

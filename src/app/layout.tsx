@@ -1,25 +1,38 @@
-import type { Metadata } from "next";
-import { Inter, Outfit, Dancing_Script } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Playfair_Display, Plus_Jakarta_Sans, Cormorant_Garamond } from "next/font/google";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import WhatsAppFloater from "@/components/ui/whatsapp-floater";
 import SmoothScroll from "@/components/layout/smooth-scroll";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
-const dancingScript = Dancing_Script({
-  variable: "--font-dancing",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
 });
+
+export const viewport: Viewport = {
+  themeColor: "#0f1729",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
 
 export const metadata: Metadata = {
   title: "Braj Mohan Group | Infrastructure & Real Estate",
@@ -79,14 +92,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${outfit.variable} ${dancingScript.variable} antialiased bg-bmd-navy text-white font-sans`}
+        className={`${playfair.variable} ${jakarta.variable} ${cormorant.variable} antialiased bg-background text-foreground font-sans`}
       >
-        <SmoothScroll>
-          <Navbar />
-          {children}
-          <Footer />
-          <WhatsAppFloater />
-        </SmoothScroll>
+        {/* <SmoothScroll> */}
+        <Navbar />
+        {children}
+        <Footer />
+        <WhatsAppFloater />
+        {/* </SmoothScroll> */}
       </body>
     </html>
   );

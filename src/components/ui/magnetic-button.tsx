@@ -5,12 +5,14 @@ import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface MagneticButtonProps extends HTMLMotionProps<"button"> {
+    fillColor?: string;
     children: React.ReactNode;
 }
 
 export default function MagneticButton({
     children,
     className,
+    fillColor = "bg-bmd-gold",
     ...props
 }: MagneticButtonProps) {
     const ref = useRef<HTMLButtonElement>(null);
@@ -35,7 +37,7 @@ export default function MagneticButton({
         <motion.button
             ref={ref}
             className={cn(
-                "group relative px-8 py-3 rounded-full border border-bmd-gold text-bmd-gold uppercase text-sm font-medium tracking-widest overflow-hidden transition-colors duration-300 ease-out hover:text-bmd-navy",
+                "group relative px-8 py-3 rounded-full border border-bmd-gold text-bmd-gold uppercase text-sm font-medium tracking-widest overflow-hidden transition-all duration-300 ease-out hover:text-white",
                 className
             )}
             animate={{ x, y }}
@@ -44,8 +46,8 @@ export default function MagneticButton({
             onMouseLeave={reset}
             {...props}
         >
-            <span className="relative z-10">{children}</span>
-            <div className="absolute inset-0 bg-bmd-gold translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out -z-0" />
+            <span className="relative z-10 flex items-center justify-center gap-2">{children}</span>
+            <div className={cn("absolute inset-0 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out -z-0", fillColor)} />
         </motion.button>
     );
 }

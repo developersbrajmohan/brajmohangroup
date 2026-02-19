@@ -60,7 +60,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className="bg-bmd-navy text-white pt-12 md:pt-20 pb-24 md:pb-10 border-t border-white/10 relative overflow-hidden">
+        <footer className="bg-bmd-navy text-white pt-12 md:pt-20 pb-12 md:pb-10 border-t border-white/10 relative overflow-hidden">
             <div className="container mx-auto px-6 md:px-12 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-16">
 

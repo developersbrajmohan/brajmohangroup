@@ -10,10 +10,10 @@ import CTA from "@/components/sections/cta";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col bg-bmd-navy overflow-hidden">
+    <main className="flex min-h-screen flex-col overflow-hidden">
       <Hero />
-      <TrustStrip />
       <AboutPreview />
+      <TrustStrip />
       <DirectorsMessage />
       <ServicesGrid />
       <ProjectsShowcase />
