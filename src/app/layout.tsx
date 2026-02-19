@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Plus_Jakarta_Sans, Cormorant_Garamond } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import WhatsAppFloater from "@/components/ui/whatsapp-floater";
@@ -100,6 +101,7 @@ export default function RootLayout({
         <Footer />
         <WhatsAppFloater />
         {/* </SmoothScroll> */}
+        <Analytics />
       </body>
     </html>
   );
