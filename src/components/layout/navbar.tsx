@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Phone, ArrowRight } from "lucide-react";
+import { Menu, X, Phone, ArrowRight, ChevronDown } from "lucide-react";
 import MagneticButton from "@/components/ui/magnetic-button";
 import { cn } from "@/lib/utils";
 
@@ -16,9 +17,16 @@ const navLinks = [
     { name: "Contact", href: "/contact" },
 ];
 
+const serviceSubLinks = [
+    { name: "Construction", href: "/services/construction" },
+    { name: "Renewable Power", href: "/services/renewable-power" },
+    { name: "Web & App Development", href: "/services/web-development" },
+];
+
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isServicesOpen, setIsServicesOpen] = useState(false);
     const pathname = usePathname();
 
     useEffect(() => {
@@ -41,6 +49,13 @@ export default function Navbar() {
         };
     }, [isMobileMenuOpen]);
 
+    // Reset services dropdown when mobile menu closes
+    useEffect(() => {
+        if (!isMobileMenuOpen) {
+            setIsServicesOpen(false);
+        }
+    }, [isMobileMenuOpen]);
+
     return (
         <>
             <motion.header
@@ -60,13 +75,16 @@ export default function Navbar() {
                     className="z-50 flex items-center shrink-0 min-w-[150px]"
                     onClick={() => setIsMobileMenuOpen(false)}
                 >
-                    <img
+                    <Image
                         src="/images/logo.jpg"
                         alt="Braj Mohan Group"
+                        width={48}
+                        height={48}
+                        priority
                         className="h-10 md:h-12 w-auto object-contain rounded-full border border-white/20"
                     />
                     <span className={cn(
-                        "ml-2 md:ml-3 font-alfa tracking-wider font-bold text-xl md:text-2xl transition-colors duration-300",
+                        "ml-2 md:ml-3 font-accent tracking-wider font-bold text-xl md:text-2xl transition-colors duration-300",
                         isScrolled ? "text-bmd-navy" : "text-white"
                     )}>
                         BRAJ MOHAN <span className="text-bmd-gold">GROUP</span>
@@ -79,7 +97,7 @@ export default function Navbar() {
                         <div key={link.name} className="relative group">
                             {link.name === "Services" ? (
                                 <button className={cn(
-                                    "relative px-2 py-4 text-sm uppercase tracking-widest transition-all duration-300 hover:text-bmd-gold hover:drop-shadow-[0_0_8px_rgba(209,168,87,0.5)] flex items-center gap-1 group",
+                                    "relative px-2 py-4 text-sm uppercase tracking-widest transition-all duration-300 hover:text-bmd-gold hover:drop-shadow-[0_0_8px_rgba(209,168,87,0.5)] flex items-center gap-1 group font-accent font-semibold",
                                     isScrolled ? "text-bmd-navy/80" : "text-white/90"
                                 )}>
                                     Services
@@ -89,7 +107,7 @@ export default function Navbar() {
                                 <Link
                                     href={link.href}
                                     className={cn(
-                                        "relative px-2 py-4 text-sm uppercase tracking-widest transition-all duration-300 hover:text-bmd-gold hover:drop-shadow-[0_0_8px_rgba(209,168,87,0.5)] block group",
+                                        "relative px-2 py-4 text-sm uppercase tracking-widest transition-all duration-300 hover:text-bmd-gold hover:drop-shadow-[0_0_8px_rgba(209,168,87,0.5)] block group font-accent font-semibold",
                                         isScrolled ? "text-bmd-navy/80" : "text-white/90"
                                     )}
                                 >
@@ -105,11 +123,7 @@ export default function Navbar() {
                                     <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-bmd-gold to-transparent opacity-50"></div>
 
                                     <div className="py-2 grid">
-                                        {[
-                                            { name: "Construction", href: "/services/construction" },
-                                            { name: "Renewable Power", href: "/services/renewable-power" },
-                                            { name: "Web & App Development", href: "/services/web-development" },
-                                        ].map((subLink) => (
+                                        {serviceSubLinks.map((subLink) => (
                                             <Link
                                                 key={subLink.name}
                                                 href={subLink.href}
@@ -151,7 +165,7 @@ export default function Navbar() {
                 >
                     {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
                 </button>
-            </motion.header >
+            </motion.header>
 
             {/* Mobile Menu Overlay */}
             <AnimatePresence>
@@ -170,67 +184,147 @@ export default function Navbar() {
 
                             {/* Sidebar */}
                             <motion.div
-                                className="fixed inset-y-0 right-0 z-50 w-[75%] max-w-sm bg-white/95 backdrop-blur-xl border-l border-bmd-navy/10 shadow-2xl flex flex-col p-8"
+                                className="fixed inset-y-0 right-0 z-50 w-[80%] max-w-sm bg-white/95 backdrop-blur-xl border-l border-bmd-navy/10 shadow-2xl flex flex-col"
                                 initial={{ x: "100%" }}
                                 animate={{ x: 0 }}
                                 exit={{ x: "100%" }}
                                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
                             >
-                                <div className="flex items-center justify-between mb-8 border-b border-white/10 pb-6">
-                                    <span className="text-xl font-serif text-bmd-navy italic">Menu</span>
+                                {/* Header */}
+                                <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-bmd-navy/10 shrink-0">
+                                    <span className="text-lg font-accent text-bmd-navy font-semibold tracking-wide">Menu</span>
                                     <button
                                         onClick={() => setIsMobileMenuOpen(false)}
                                         className="p-2 -mr-2 text-bmd-navy/60 hover:text-bmd-navy transition-colors rounded-full hover:bg-bmd-navy/5"
                                     >
-                                        <X size={24} />
+                                        <X size={22} />
                                     </button>
                                 </div>
 
-                                <div className="flex flex-col space-y-6">
-                                    {navLinks.map((link, i) => {
-                                        const isActive = pathname === link.href;
-                                        return (
-                                            <motion.div
-                                                key={link.name}
-                                                initial={{ opacity: 0, x: 20 }}
-                                                animate={{ opacity: 1, x: 0 }}
-                                                transition={{ delay: 0.1 + i * 0.1 }}
-                                            >
-                                                <Link
-                                                    href={link.href}
-                                                    className={cn(
-                                                        "text-2xl font-serif transition-colors block border-b border-bmd-navy/5 pb-4",
-                                                        isActive ? "text-bmd-gold border-bmd-gold/30 pl-2" : "text-bmd-navy hover:text-bmd-gold"
-                                                    )}
-                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                {/* Scrollable Nav Links */}
+                                <div className="flex-1 overflow-y-auto px-6 py-6">
+                                    <div className="flex flex-col space-y-1">
+                                        {navLinks.map((link, i) => {
+                                            const isActive = pathname === link.href || (link.name === "Services" && pathname.startsWith("/services"));
+
+                                            if (link.name === "Services") {
+                                                return (
+                                                    <motion.div
+                                                        key={link.name}
+                                                        initial={{ opacity: 0, x: 20 }}
+                                                        animate={{ opacity: 1, x: 0 }}
+                                                        transition={{ delay: 0.1 + i * 0.08 }}
+                                                    >
+                                                        {/* Services Toggle Button */}
+                                                        <button
+                                                            onClick={() => setIsServicesOpen(!isServicesOpen)}
+                                                            className={cn(
+                                                                "w-full flex items-center justify-between text-lg font-accent font-semibold tracking-wide transition-colors py-3 border-b border-bmd-navy/5",
+                                                                isActive ? "text-bmd-gold" : "text-bmd-navy hover:text-bmd-gold"
+                                                            )}
+                                                        >
+                                                            <span>Services</span>
+                                                            <motion.div
+                                                                animate={{ rotate: isServicesOpen ? 180 : 0 }}
+                                                                transition={{ duration: 0.3 }}
+                                                            >
+                                                                <ChevronDown size={18} className="text-bmd-gold" />
+                                                            </motion.div>
+                                                        </button>
+
+                                                        {/* Services Dropdown Sub-links */}
+                                                        <AnimatePresence>
+                                                            {isServicesOpen && (
+                                                                <motion.div
+                                                                    initial={{ height: 0, opacity: 0 }}
+                                                                    animate={{ height: "auto", opacity: 1 }}
+                                                                    exit={{ height: 0, opacity: 0 }}
+                                                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                                                    className="overflow-hidden"
+                                                                >
+                                                                    <div className="pl-4 py-2 space-y-1 border-l-2 border-bmd-gold/30 ml-2">
+                                                                        {serviceSubLinks.map((subLink, j) => (
+                                                                            <motion.div
+                                                                                key={subLink.name}
+                                                                                initial={{ opacity: 0, x: -10 }}
+                                                                                animate={{ opacity: 1, x: 0 }}
+                                                                                transition={{ delay: j * 0.08 }}
+                                                                            >
+                                                                                <Link
+                                                                                    href={subLink.href}
+                                                                                    className={cn(
+                                                                                        "flex items-center justify-between py-2.5 px-3 text-sm font-body tracking-wide rounded-lg transition-all duration-200 group/sub",
+                                                                                        pathname === subLink.href
+                                                                                            ? "text-bmd-gold bg-bmd-gold/10"
+                                                                                            : "text-gray-600 hover:text-bmd-navy hover:bg-bmd-navy/5"
+                                                                                    )}
+                                                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                                                                >
+                                                                                    <span>{subLink.name}</span>
+                                                                                    <ArrowRight size={14} className="text-bmd-gold opacity-0 group-hover/sub:opacity-100 transition-opacity" />
+                                                                                </Link>
+                                                                            </motion.div>
+                                                                        ))}
+                                                                        <motion.div
+                                                                            initial={{ opacity: 0, x: -10 }}
+                                                                            animate={{ opacity: 1, x: 0 }}
+                                                                            transition={{ delay: serviceSubLinks.length * 0.08 }}
+                                                                        >
+                                                                            <Link
+                                                                                href="/services"
+                                                                                className="block py-2.5 px-3 text-xs uppercase tracking-[0.15em] text-bmd-gold hover:text-bmd-navy font-bold rounded-lg hover:bg-bmd-gold/10 transition-all duration-200 text-center mt-1 border-t border-bmd-navy/5 pt-3"
+                                                                                onClick={() => setIsMobileMenuOpen(false)}
+                                                                            >
+                                                                                View All Services
+                                                                            </Link>
+                                                                        </motion.div>
+                                                                    </div>
+                                                                </motion.div>
+                                                            )}
+                                                        </AnimatePresence>
+                                                    </motion.div>
+                                                );
+                                            }
+
+                                            return (
+                                                <motion.div
+                                                    key={link.name}
+                                                    initial={{ opacity: 0, x: 20 }}
+                                                    animate={{ opacity: 1, x: 0 }}
+                                                    transition={{ delay: 0.1 + i * 0.08 }}
                                                 >
-                                                    {link.name}
-                                                </Link>
-                                            </motion.div>
-                                        );
-                                    })}
+                                                    <Link
+                                                        href={link.href}
+                                                        className={cn(
+                                                            "text-lg font-accent font-semibold tracking-wide transition-colors block border-b border-bmd-navy/5 py-3",
+                                                            isActive ? "text-bmd-gold pl-2" : "text-bmd-navy hover:text-bmd-gold"
+                                                        )}
+                                                        onClick={() => setIsMobileMenuOpen(false)}
+                                                    >
+                                                        {link.name}
+                                                    </Link>
+                                                </motion.div>
+                                            );
+                                        })}
+                                    </div>
                                 </div>
 
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: 0.6 }}
-                                    className="mt-auto mb-8"
-                                >
+                                {/* Footer CTA */}
+                                <div className="shrink-0 px-6 pb-6 pt-4 border-t border-bmd-navy/10">
                                     <a href="tel:+919031074805" className="block">
-                                        <MagneticButton className="w-full justify-center bg-bmd-gold text-bmd-navy border-transparent hover:bg-bmd-navy hover:text-white flex items-center gap-2 font-bold py-4">
-                                            <Phone size={18} fill="currentColor" /> Call Now
+                                        <MagneticButton className="w-full justify-center bg-bmd-gold text-bmd-navy border-transparent hover:bg-bmd-navy hover:text-white flex items-center gap-2 font-bold py-3.5 text-sm rounded-xl">
+                                            <Phone size={16} fill="currentColor" /> Call Now
                                         </MagneticButton>
                                     </a>
-                                    <p className="text-center text-gray-500 text-xs mt-6 uppercase tracking-widest">
+                                    <p className="text-center text-gray-400 text-[10px] mt-4 uppercase tracking-[0.15em]">
                                         &copy; {new Date().getFullYear()} Braj Mohan Group
                                     </p>
-                                </motion.div>
+                                </div>
                             </motion.div>
                         </>
                     )
                 }
-            </AnimatePresence >
+            </AnimatePresence>
         </>
     );
 }

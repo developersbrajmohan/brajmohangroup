@@ -4,6 +4,7 @@ import SectionWrapper from "@/components/ui/section-wrapper";
 import { HardHat, Globe, Sun, Smartphone, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 const serviceDetails = [
     {
@@ -169,10 +170,12 @@ export default function ServicesPage() {
                                     <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} rounded-3xl blur-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-500`} />
                                     <div className="relative aspect-video rounded-3xl overflow-hidden border border-white/40 shadow-2xl">
                                         <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-20 z-10`} />
-                                        <img
+                                        <Image
                                             src={service.image}
                                             alt={service.title}
-                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                            fill
+                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                            className="object-cover group-hover:scale-105 transition-transform duration-700"
                                         />
                                     </div>
                                     <div className={`absolute -bottom-4 ${index % 2 !== 0 ? '-left-4' : '-right-4'} w-16 h-16 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center shadow-xl`}>

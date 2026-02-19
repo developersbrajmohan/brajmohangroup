@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Facebook, Instagram, Linkedin, Twitter, MapPin, Phone, Mail, Send, Navigation } from "lucide-react";
 import MagneticButton from "../ui/magnetic-button";
 import { useState } from "react";
@@ -68,9 +69,11 @@ export default function Footer() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="space-y-6">
                             <Link href="/" className="flex items-center gap-3">
-                                <img
+                                <Image
                                     src="/images/logo.jpg"
                                     alt="Braj Mohan Group"
+                                    width={56}
+                                    height={56}
                                     className="h-14 w-14 rounded-full bg-white p-1 object-contain"
                                 />
                                 <span className="text-2xl font-serif font-bold tracking-wider text-white italic">Braj Mohan <span className="text-bmd-gold not-italic">Group</span></span>
