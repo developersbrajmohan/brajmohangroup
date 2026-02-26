@@ -107,7 +107,7 @@ export default function Hero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1, delay: 0.8 }}
-                    className="text-gray-100 text-base md:text-xl max-w-xl md:max-w-2xl mx-auto mb-8 md:mb-10 font-light leading-relaxed px-4 drop-shadow-md"
+                    className="text-gray-100 text-base md:text-xl max-w-xl md:max-w-2xl mx-auto mb-8 md:mb-10 font-bold leading-relaxed px-4 drop-shadow-md"
                 >
                     A multidisciplinary infrastructure powerhouse transforming the landscape with
                     innovation, integrity, and sustainable solutions.

@@ -19,13 +19,19 @@ const projects = [
     { src: "/images/work-gallery/work-3.jpeg", category: "Civil Construction" },
     { src: "/images/work-gallery/work-4.jpeg", category: "Smart Metering" },
     { src: "/images/work-gallery/work-5.jpeg", category: "Smart Metering" },
-    { src: "/images/work-gallery/work-6.jpeg", category: "Solar" },
     { src: "/images/work-gallery/work-7.jpeg", category: "Civil Construction" },
     { src: "/images/work-gallery/work-8.jpeg", category: "Smart Metering" },
     { src: "/images/work-gallery/work-9.jpeg", category: "Civil Construction" },
     { src: "/images/work-gallery/work-10.jpeg", category: "Civil Construction" },
-    { src: "/images/work-gallery/work-11.jpeg", category: "Solar" },
     { src: "/images/work-gallery/work-12.jpeg", category: "Civil Construction" },
+    // Real Solar Project Photos
+    { src: "/images/solar-gallery/IMG-20250805-WA0021.jpg", category: "Solar" },
+    { src: "/images/solar-gallery/IMG-20250805-WA0022.jpg", category: "Solar" },
+    { src: "/images/solar-gallery/IMG-20250805-WA0023.jpg", category: "Solar" },
+    { src: "/images/solar-gallery/IMG-20250805-WA0025.jpg", category: "Solar" },
+    { src: "/images/solar-gallery/IMG-20250805-WA0031.jpg", category: "Solar" },
+    { src: "/images/solar-gallery/IMG-20250805-WA0041.jpg", category: "Solar" },
+    { src: "/images/solar-gallery/solar_installation_18-10_800x.webp", category: "Solar" },
 ];
 
 export default function ProjectsPage() {
@@ -134,7 +140,7 @@ export default function ProjectsPage() {
                                         fill
                                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                                         sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                                        unoptimized
+                                        quality={75}
                                     />
                                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
                                 </motion.div>

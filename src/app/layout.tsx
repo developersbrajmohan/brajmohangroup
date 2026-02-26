@@ -94,12 +94,10 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${jakarta.variable} ${cormorant.variable} antialiased bg-background text-foreground font-sans`}
       >
-        {/* <SmoothScroll> */}
         <Navbar />
         {children}
         <Footer />
         <WhatsAppFloater />
-        {/* </SmoothScroll> */}
       </body>
     </html>
   );

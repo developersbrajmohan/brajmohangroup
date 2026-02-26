@@ -63,15 +63,24 @@
   --foreground: #0f1729;
 }
 
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body);
   overflow-x: hidden;
+  overflow-y: scroll;
+  /* prevents layout shift from scrollbar appear/disappear */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: 0.01em;
   line-height: 1.7;
+  -webkit-overflow-scrolling: touch;
+  /* smooth momentum scroll on iOS */
 }
 
 h1,
