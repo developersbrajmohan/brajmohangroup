@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/private/',
         },
-        sitemap: 'https://brajmohangroup.com/sitemap.xml',
+        sitemap: 'https://brajmohangroup.in/sitemap.xml',
     };
 }

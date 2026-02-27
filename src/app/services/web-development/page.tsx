@@ -6,7 +6,7 @@ import WebDevPackages from "@/components/sections/web-dev/packages";
 
 export const metadata = {
     title: "Web & App Development | Braj Mohan Group",
-    description: "Premium website and mobile app development services in Patna. Custom solutions for businesses using Next.js, React Native, and modern tech.",
+    description: "Premium website and mobile app development services in Patna. Custom IT solutions, Next.js, and React Native development.",
 };
 
 export default function WebDevelopmentPage() {

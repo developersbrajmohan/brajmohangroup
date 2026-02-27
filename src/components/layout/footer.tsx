@@ -95,7 +95,7 @@ export default function Footer() {
                                     <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:from-bmd-gold/20 group-hover:to-bmd-gold/5 group-hover:border-bmd-gold/30 transition-all duration-300 shadow-lg">
                                         <Mail size={18} className="text-bmd-gold group-hover:scale-110 transition-transform" />
                                     </div>
-                                    <span className="group-hover:text-white transition-colors">info@brajmohangroup.com</span>
+                                    <span className="group-hover:text-white transition-colors">info@brajmohangroup.in</span>
                                 </div>
                                 <div className="pt-4 border-t border-white/5 space-y-1">
                                     <p className="text-xs text-gray-500 uppercase tracking-wider">CIN: <span className="text-gray-400">U45200BR1999PTC009060</span></p>

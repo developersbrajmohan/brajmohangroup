@@ -9,7 +9,7 @@ import { submitInquiry } from "@/actions/submit-inquiry";
 const contactItems = [
     { icon: MapPin, title: "Visit Us", info: "8H/7 Bahadurpur Housing Colony,\nNew Bypass Road, Patna - 800026", gradient: "from-indigo-500 to-purple-600" },
     { icon: Phone, title: "Call Us", info: "+91 90310 74805", gradient: "from-purple-500 to-pink-600" },
-    { icon: Mail, title: "Email Us", info: "info@brajmohangroup.com", gradient: "from-pink-500 to-rose-600" },
+    { icon: Mail, title: "Email Us", info: "info@brajmohangroup.in", gradient: "from-pink-500 to-rose-600" },
     { icon: Clock, title: "Opening Hours", info: "Mon - Sat: 10:00 AM - 7:00 PM\nSun: Closed", gradient: "from-orange-500 to-yellow-600" },
 ];
 

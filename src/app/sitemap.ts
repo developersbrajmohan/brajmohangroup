@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://brajmohangroup.com';
+    const baseUrl = 'https://brajmohangroup.in';
 
     // Core routes
     const routes = [

@@ -35,18 +35,18 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Braj Mohan Group | Infrastructure & Real Estate",
-  description: "Braj Mohan Group - Leading infrastructure powerhouse in Bihar specializing in civil projects, real estate, energy, and digital solutions since 1999.",
-  keywords: ["Infrastructure", "Real Estate", "Civil Construction", "Solar Energy", "Bihar", "Patna", "Braj Mohan Group", "Construction Company"],
+  title: "Braj Mohan Group | Solar, Infrastructure & IT Solutions",
+  description: "Braj Mohan Group - Leading powerhouse in Bihar specializing in civil projects, renewable energy, and digital solutions since 1999.",
+  keywords: ["Solar", "Infrastructure", "Real Estate", "Civil Construction", "Solar Energy", "Web Development", "App Development", "IT Solutions", "Bihar", "Patna", "Braj Mohan Group", "Construction Company"],
   icons: {
     icon: "/images/logo.jpg",
     shortcut: "/images/logo.jpg",
     apple: "/images/logo.jpg",
   },
   openGraph: {
-    title: "Braj Mohan Group | Infrastructure & Real Estate",
+    title: "Braj Mohan Group | Solar, Infrastructure & IT Solutions",
     description: "Building India's Future with Integrity & Innovation. 25+ Years of Excellence.",
-    url: "https://brajmohangroup.com",
+    url: "https://brajmohangroup.in",
     siteName: "Braj Mohan Group",
     images: [
       {
@@ -61,14 +61,14 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Braj Mohan Group | Infrastructure & Real Estate",
+    title: "Braj Mohan Group | Solar, Infrastructure & IT Solutions",
     description: "Building India's Future with Integrity & Innovation.",
     images: ["/images/og-image.jpg"],
   },
   alternates: {
-    canonical: "https://brajmohangroup.com",
+    canonical: "https://brajmohangroup.in",
     languages: {
-      'en-IN': 'https://brajmohangroup.com',
+      'en-IN': 'https://brajmohangroup.in',
     },
   },
   robots: {
