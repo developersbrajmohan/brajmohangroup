@@ -99,3 +99,34 @@ h6 {
   letter-spacing: 0.02em;
   font-weight: 600;
 }
+
+/* Chatbot Markdown Content Styling */
+.chatbot-markdown strong {
+  color: var(--color-bmd-gold);
+  font-weight: 800;
+}
+
+.chatbot-markdown ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.chatbot-markdown li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.chatbot-markdown li::before {
+  content: "•";
+  position: absolute;
+  left: 0.5rem;
+  color: var(--color-bmd-gold);
+  font-weight: bold;
+}
+
+.chatbot-markdown p {
+  margin-bottom: 0.5rem;
+}

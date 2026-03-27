@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function WhatsAppFloater() {
     return (
-        <div className="fixed bottom-8 right-8 z-50 flex items-center justify-center group">
+        <div className="fixed bottom-24 right-8 z-50 flex items-center justify-center group">
             {/* Tooltip Label */}
             <span className="absolute right-full mr-4 bg-white text-bmd-navy px-3 py-1 rounded-sm text-sm font-bold shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
                 Chat with us

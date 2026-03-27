@@ -3,6 +3,7 @@ import { Playfair_Display, Plus_Jakarta_Sans, Cormorant_Garamond } from "next/fo
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import WhatsAppFloater from "@/components/ui/whatsapp-floater";
+import SolarChatbot from "@/components/ui/solar-chatbot";
 import SmoothScroll from "@/components/layout/smooth-scroll";
 import "./globals.css";
 
@@ -98,6 +99,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <WhatsAppFloater />
+        <SolarChatbot />
       </body>
     </html>
   );
