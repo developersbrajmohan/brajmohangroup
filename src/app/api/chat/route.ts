@@ -29,8 +29,25 @@ export async function POST(req: NextRequest) {
 
     // 4. Handle side-effects (e.g. Save final Lead Data to external DB)
     if (handlerResult.saveLead) {
-       console.log("🚀 LEAD CAPTURED COMPLETELY:", getSession(body.sessionId).lead);
-       // e.g. await fetch(...) to CRM
+       const leadData = getSession(body.sessionId).lead;
+       console.log("🚀 LEAD CAPTURED COMPLETELY:", leadData);
+       
+       const webhookUrl = process.env.CHATBOT_GOOGLE_SHEETS_URL;
+       if (webhookUrl) {
+         try {
+           const res = await fetch(webhookUrl, {
+             method: "POST",
+             headers: { "Content-Type": "application/json" },
+             body: JSON.stringify({
+               ...leadData,
+               timestamp: new Date().toISOString(),
+             }),
+           });
+           if (!res.ok) console.warn("⚠️ Google Sheets webhook returned:", res.status);
+         } catch(e) {
+           console.error("Failed to forward lead to webhook:", e);
+         }
+       }
     }
 
     // Return the purely reactive constraints back to the Dumb Client
