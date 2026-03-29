@@ -1,34 +1,46 @@
 import { NextRequest, NextResponse } from "next/server";
-import { callAI, buildSystemPrompt } from "@/lib/ai";
-import { searchKnowledge } from "@/lib/search";
+import { processChatOrchestrator } from "@/lib/chat-handler";
+import { getSession, updateSession } from "@/lib/session.service";
 import { ChatMessage } from "@/lib/types";
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json() as { messages: ChatMessage[]; query?: string };
+    const body = await req.json() as { sessionId: string; input: string; messages: ChatMessage[] };
 
-    if (!body.messages || !Array.isArray(body.messages)) {
-      return NextResponse.json({ error: "messages array is required" }, { status: 400 });
+    if (!body.sessionId || body.input === undefined) {
+      return NextResponse.json({ error: "sessionId and input are required" }, { status: 400 });
     }
 
-    // RAG: search knowledge base using the latest user message as the query
-    const query = body.query ?? body.messages.filter(m => m.role === "user").pop()?.content ?? "";
-    const ragContext = searchKnowledge(query, 3);
+    // 1. Recover authoritative session
+    const session = getSession(body.sessionId);
 
-    // Build system prompt with injected context
-    const systemPrompt = buildSystemPrompt(ragContext);
+    // 2. Pass execution to 3-Layer Orchestrator
+    const handlerResult = await processChatOrchestrator(session, body.input, body.messages || []);
 
-    // Call AI
-    const content = await callAI(body.messages, systemPrompt);
-
-    if (!content) {
-      return NextResponse.json(
-        { error: "AI unavailable. Please try again shortly." },
-        { status: 503 }
-      );
+    // 3. Mutate internal session state securely
+    if (handlerResult.leadUpdate) {
+        updateSession(body.sessionId, {
+            step: handlerResult.nextStep,
+            lead: { ...session.lead, ...handlerResult.leadUpdate } as any
+        });
+    } else {
+        updateSession(body.sessionId, { step: handlerResult.nextStep });
     }
 
-    return NextResponse.json({ content });
+    // 4. Handle side-effects (e.g. Save final Lead Data to external DB)
+    if (handlerResult.saveLead) {
+       console.log("🚀 LEAD CAPTURED COMPLETELY:", getSession(body.sessionId).lead);
+       // e.g. await fetch(...) to CRM
+    }
+
+    // Return the purely reactive constraints back to the Dumb Client
+    return NextResponse.json({
+       replies: handlerResult.replies,
+       nextStep: handlerResult.nextStep,
+       options: handlerResult.options || [],
+       leadState: getSession(body.sessionId).lead // pass back for UI pdf generation if needed
+    });
+    
   } catch (err) {
     console.error("❌ /api/chat error:", err);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });

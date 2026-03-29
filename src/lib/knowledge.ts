@@ -34,7 +34,7 @@ export const knowledgeBase: KnowledgeChunk[] = [
     content: `Residential Solar Pricing (with PM Surya Ghar Subsidy):
 - 1 kW: ₹75,000 gross | Subsidy: ₹30,000 | Net cost: ₹45,000
 - 2 kW: ₹1,40,000 gross | Subsidy: ₹60,000 | Net cost: ₹80,000
-- 3 kW: ₹1,95,000 gross | Subsidy: ₹78,000 | Net cost: ₹1,17,000
+- 3 kW: ₹2,10,000 gross | Subsidy: ₹78,000 | Net cost: ₹1,32,000
 - 4 kW and above: ₹65,000/kW (subsidy capped at ₹78,000 for 3kW+)
 Example: 5kW residential = 5 × ₹65,000 = ₹3,25,000 gross | Net after ₹78,000 subsidy = ₹2,47,000
 The PM Surya Ghar subsidy maximum is ₹78,000 for 3kW or more.`,

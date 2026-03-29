@@ -2,8 +2,6 @@
 
 export type Language = "en" | "hi";
 
-export type ChatMode = "FLOW" | "AI";
-
 export type FlowStep =
   | "language"
   | "service"
@@ -11,18 +9,22 @@ export type FlowStep =
   | "lead_phone"
   | "lead_city"
   | "solar_type"
+  | "solar_grid_type"
+  | "solar_panel_brand"
+  | "solar_inverter_brand"
+  | "solar_battery_brand"
   | "solar_details"
   | "solar_units"
+  | "solar_quotation"
   | "civil_type"
   | "it_type"
-  | "recommendation"
-  | "ai_chat";
+  | "ai_chat"
+  | "done";
 
 export interface Message {
   id: string;
   role: "bot" | "user";
   content: string;
-  /** Optional quick-reply buttons rendered below the message */
   options?: QuickReply[];
 }
 
@@ -37,31 +39,45 @@ export interface LeadData {
   name?: string;
   phone?: string;
   city?: string;
-  email?: string;
   language: Language;
   service?: string;
   solarType?: "home" | "commercial";
+  gridType?: string;
+  panelBrand?: string;
+  inverterBrand?: string;
+  batteryBrand?: string;
   hasSpace?: boolean;
   monthlyUnits?: number;
   recommendedKw?: number;
   estimatedPrice?: number;
   subsidyAmount?: number;
-  message?: string;
+  score?: "hot" | "warm" | "cold";
   projectType?: string;
   digitalNeed?: string;
+  email?: string;
+  message?: string;
+}
+
+// ─── Session Handling ───────────────────────────────────────────────────────
+
+export interface ChatSession {
+  id: string;
+  step: FlowStep;
+  language: Language;
+  lead: LeadData;
+  invalidAttempts: Record<string, number>; // Track attempts per step id
+  aiCallCount: number;
+  lastUpdated: number;
 }
 
 // ─── Handler Types ────────────────────────────────────────────────────────────
 
 export interface HandlerResult {
-  /** Messages to append (bot replies) */
   replies: string[];
-  /** Next step in the flow */
   nextStep: FlowStep;
-  /** Updated lead data (partial merge) */
   leadUpdate?: Partial<LeadData>;
-  /** Should save the lead now? */
   saveLead?: boolean;
+  options?: QuickReply[];
 }
 
 export interface ChatMessage {
