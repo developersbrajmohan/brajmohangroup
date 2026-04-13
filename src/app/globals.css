@@ -1,62 +1,26 @@
-/* Premium font trio: Playfair Display + Plus Jakarta Sans + Cormorant Garamond */
+/* Premium font duo: Playfair Display + Plus Jakarta Sans + Cormorant Garamond (accent) */
 @import "tailwindcss";
 
 @theme {
   --color-bmd-navy: #0f1729;
   --color-bmd-navy-light: #1a2336;
+  --color-bmd-navy-muted: #2a3450;
   --color-bmd-gold: #d1a857;
   --color-bmd-gold-light: #eecf8a;
+  --color-bmd-gold-dark: #b8932e;
+
+  /* Clean neutral surfaces */
+  --color-surface: #ffffff;
+  --color-surface-warm: #fafaf8;
+  --color-surface-muted: #f5f5f3;
+  --color-border-subtle: #e8e6e1;
 
   --font-heading: var(--font-playfair), Georgia, serif;
   --font-body: var(--font-jakarta), system-ui, sans-serif;
   --font-accent: var(--font-cormorant), Georgia, serif;
-
-  --animate-blob: blob 7s infinite;
 }
 
-
-
-@keyframes blob {
-
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-}
-
-.animate-blob {
-  animation: blob 7s infinite;
-}
-
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-
-.animation-delay-4000 {
-  animation-delay: 4s;
-}
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-.animate-shimmer {
-  animation: shimmer 3s infinite;
-}
+/* ─── Root ────────────────────────────────────────────────────── */
 
 :root {
   --background: #ffffff;
@@ -74,33 +38,86 @@ body {
   font-family: var(--font-body);
   overflow-x: hidden;
   overflow-y: scroll;
-  /* prevents layout shift from scrollbar appear/disappear */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: 0.01em;
   line-height: 1.7;
   -webkit-overflow-scrolling: touch;
-  /* smooth momentum scroll on iOS */
 }
 
-h1,
-h2,
-h3,
-h4 {
+h1, h2, h3, h4 {
   font-family: var(--font-heading);
   letter-spacing: -0.02em;
   line-height: 1.2;
   font-weight: 700;
 }
 
-h5,
-h6 {
+h5, h6 {
   font-family: var(--font-body);
   letter-spacing: 0.02em;
   font-weight: 600;
 }
 
-/* Chatbot Markdown Content Styling */
+/* ─── Premium Scroll Reveal System ────────────────────────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children — each child delays slightly more */
+.reveal-stagger > .reveal-child {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-stagger.visible > .reveal-child {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger.visible > .reveal-child:nth-child(1)  { transition-delay: 0ms; }
+.reveal-stagger.visible > .reveal-child:nth-child(2)  { transition-delay: 80ms; }
+.reveal-stagger.visible > .reveal-child:nth-child(3)  { transition-delay: 160ms; }
+.reveal-stagger.visible > .reveal-child:nth-child(4)  { transition-delay: 240ms; }
+.reveal-stagger.visible > .reveal-child:nth-child(5)  { transition-delay: 320ms; }
+.reveal-stagger.visible > .reveal-child:nth-child(6)  { transition-delay: 400ms; }
+.reveal-stagger.visible > .reveal-child:nth-child(7)  { transition-delay: 480ms; }
+.reveal-stagger.visible > .reveal-child:nth-child(8)  { transition-delay: 560ms; }
+.reveal-stagger.visible > .reveal-child:nth-child(9)  { transition-delay: 640ms; }
+.reveal-stagger.visible > .reveal-child:nth-child(10) { transition-delay: 720ms; }
+.reveal-stagger.visible > .reveal-child:nth-child(11) { transition-delay: 800ms; }
+.reveal-stagger.visible > .reveal-child:nth-child(12) { transition-delay: 880ms; }
+
+/* ─── Accessibility: Reduced Motion ───────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-stagger > .reveal-child {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .trust-scroll,
+  .animate-marquee {
+    animation-duration: 0s !important;
+  }
+}
+
+/* ─── Chatbot Markdown Content Styling ────────────────────────── */
+
 .chatbot-markdown strong {
   color: var(--color-bmd-gold);
   font-weight: 800;

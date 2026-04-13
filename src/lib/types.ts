@@ -11,7 +11,6 @@ export type FlowStep =
   | "solar_type"
   | "solar_grid_type"
   | "solar_panel_brand"
-  | "solar_inverter_brand"
   | "solar_battery_brand"
   | "solar_details"
   | "solar_units"

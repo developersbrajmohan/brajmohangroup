@@ -2,37 +2,36 @@ import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Plus_Jakarta_Sans, Cormorant_Garamond } from "next/font/google";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
-import WhatsAppFloater from "@/components/ui/whatsapp-floater";
 import SolarChatbot from "@/components/ui/solar-chatbot";
-import SmoothScroll from "@/components/layout/smooth-scroll";
 import "./globals.css";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["400", "700", "800"],
   style: ["normal", "italic"],
+  display: "swap",
 });
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "600", "700"],
+  display: "swap",
 });
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  style: ["normal", "italic"],
+  weight: ["400", "600"],
+  style: ["normal"],
+  display: "swap",
 });
 
 export const viewport: Viewport = {
   themeColor: "#0f1729",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 };
 
 export const metadata: Metadata = {
@@ -51,7 +50,7 @@ export const metadata: Metadata = {
     siteName: "Braj Mohan Group",
     images: [
       {
-        url: "/images/og-image.jpg", // We'll need to make sure this exists or just fallback to logo for now if typical
+        url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Braj Mohan Group Projects",
@@ -98,7 +97,6 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
-        <WhatsAppFloater />
         <SolarChatbot />
       </body>
     </html>

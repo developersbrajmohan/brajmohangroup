@@ -128,7 +128,12 @@ export default function SolarChatbot() {
       
       if (data.options?.find((o: any) => o.value === "TRIGGER_PDF")) {
          setIsGeneratingPDF(true);
-         fetch(`/api/pdf?sessionId=${sessionId}`).then(r => r.blob()).then(blob => {
+         const currentLead = data.leadState || leadState || {};
+         fetch("/api/pdf", {
+             method: "POST",
+             headers: { "Content-Type": "application/json" },
+             body: JSON.stringify(currentLead)
+         }).then(r => r.blob()).then(blob => {
              const url = window.URL.createObjectURL(blob);
              const a = document.createElement('a');
              a.href = url;

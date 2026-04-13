@@ -1,24 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import { generateQuotationPDF } from "@/lib/pdf.service";
-import { getSession } from "@/lib/session.service";
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url);
-    const sessionId = searchParams.get("sessionId");
+    const lead = await req.json();
 
-    if (!sessionId) {
-      return NextResponse.json({ error: "missing sessionId" }, { status: 400 });
+    if (!lead) {
+      return NextResponse.json({ error: "missing lead data" }, { status: 400 });
     }
 
-    const session = getSession(sessionId);
-    const pdfBuffer = await generateQuotationPDF(session.lead);
+    const pdfBuffer = await generateQuotationPDF(lead);
 
     return new NextResponse(pdfBuffer, {
       status: 200,
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": `attachment; filename="BMD_Quotation_${session.lead.name || "Customer"}.pdf"`,
+        "Content-Disposition": `attachment; filename="BMD_Quotation_${lead.name || "Customer"}.pdf"`,
       },
     });
   } catch (err) {

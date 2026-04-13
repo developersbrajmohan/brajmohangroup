@@ -230,17 +230,16 @@ const handlers: Partial<Record<FlowStep, LogicHandler>> = {
     };
   },
 
-  solar_panel_brand({ normInput, lang }) {
-    return {
-      replies: [t[lang].inverterPrompt],
-      nextStep: "solar_inverter_brand",
-      leadUpdate: { panelBrand: normInput },
-      options: ["Growatt", "Deye", "Luminous", "Microtek", "Havells"].map(l => ({ label: l, value: l }))
-    };
-  },
+  solar_panel_brand({ normInput, session, lang }) {
+    const s = normInput.toLowerCase();
+    let inverterBrand = "Microtek";
+    if (s.includes("tata")) inverterBrand = "Tata";
+    else if (s.includes("loom")) inverterBrand = "Microtek";
+    else if (s.includes("luminous")) inverterBrand = "Luminous";
+    else if (s.includes("livguard")) inverterBrand = "Livguard";
 
-  solar_inverter_brand({ normInput, session, lang }) {
-    const updated = { ...session.lead, inverterBrand: normInput };
+    const updated = { ...session.lead, panelBrand: normInput, inverterBrand };
+
     if (updated.gridType === "Hybrid" || updated.gridType === "Off Grid") {
       return {
         replies: [t[lang].batteryPrompt],

@@ -24,11 +24,11 @@ const clientLogos = [
 
 export default function TrustStrip() {
     return (
-        <div className="w-full relative py-12 overflow-hidden bg-gray-50 border-y border-gray-100">
+        <div className="w-full relative py-14 overflow-hidden bg-surface-warm border-y border-border-subtle">
 
             {/* Edge fades */}
-            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-surface-warm to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-surface-warm to-transparent z-10 pointer-events-none" />
 
             {/* Label */}
             <div className="text-center mb-8">
@@ -43,7 +43,7 @@ export default function TrustStrip() {
                     {[...clientLogos, ...clientLogos].map((logo, i) => (
                         <div
                             key={i}
-                            className="flex-shrink-0 flex flex-col items-center justify-center gap-3 bg-white rounded-xl border border-gray-100 px-5 py-4 shadow-sm"
+                            className="flex-shrink-0 flex flex-col items-center justify-center gap-3 bg-white rounded-xl border border-border-subtle px-5 py-4 shadow-sm"
                             style={{ width: 180, height: 110 }}
                         >
                             <div className="flex-1 flex items-center justify-center w-full min-h-0">
@@ -52,11 +52,12 @@ export default function TrustStrip() {
                                     alt={logo.name}
                                     width={120}
                                     height={60}
-                                    className="object-contain w-full h-full opacity-75 hover:opacity-100 transition-all duration-500"
-                                    unoptimized
+                                    className="object-contain w-full h-full hover:scale-110 transition-all duration-500"
+                                    sizes="120px"
+                                    quality={75}
                                 />
                             </div>
-                            <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest text-center">
+                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest text-center">
                                 {logo.name}
                             </span>
                         </div>
